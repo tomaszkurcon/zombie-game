@@ -1,0 +1,199 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "KdamThmorPro";
+}
+body {
+  background-image: url("../assets/images/board-bg.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  cursor: none;
+}
+#cursor {
+  background-image: url("../assets/images/aim.png");
+  background-size: cover;
+  position: absolute;
+  display: none;
+  width: 150px;
+  height: 150px;
+  pointer-events: none;
+  z-index: 1000;
+}
+header {
+  position: absolute;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  padding: 40px;
+}
+#header-overlay {
+  width: 100%;
+  height: 150px;
+  position: absolute;
+  z-index: 10;
+}
+#overlay-backdrop {
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  background-color: rgba(58, 57, 58, 0.8);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: auto;
+}
+
+#lifes {
+  display: flex;
+  gap: 10px;
+  list-style: none;
+  user-select: none;
+}
+.life-img {
+  width: 65px;
+  height: 65px;
+}
+
+#score {
+  color: white;
+  font-size: 65px;
+  font-weight: bold;
+  user-select: none;
+}
+.modal-cart {
+  width: 600px;
+  height: 400px;
+  border-radius: 20px;
+  background-color: #eeeeee;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: url("../assets/images/modal-background.avif");
+  background-repeat: none;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  box-shadow: 0px 0px 85px -5px rgba(0, 0, 0, 1);
+}
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
+}
+#end-game-modal {
+  display: none;
+}
+.score {
+  color: #f6eee3;
+  font-size: 40px;
+  text-shadow: 0px 0px 10px rgb(0, 0, 0);
+}
+#score-amount {
+  margin: 5px 0px 20px 0px;
+}
+.modal-zombie {
+  background-image: url("../assets/images/walkingdead.png");
+  background-size: 1000% 100%;
+  background-repeat: no-repeat;
+  position: absolute;
+  width: 100px;
+  height: calc(100 * 1.56px);
+  animation: zombie-animate 1s steps(9) infinite,
+    zombie-move-left-right 3s linear infinite alternate,
+    rotate-zombie 6s steps(1, end) infinite;
+  right: 20px;
+  bottom: 20px;
+}
+.button {
+  width: 200px;
+  height: 50px;
+  margin-bottom: 100px;
+  border-radius: 10px;
+  background: linear-gradient(
+    90deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(10, 82, 148, 1) 0%,
+    rgba(0, 212, 255, 1) 100%
+  );
+  border: none;
+  cursor: pointer;
+  background-size: 200%;
+  box-shadow: 4px 3px 34px 2px rgb(37, 38, 50);
+  color: #eeeeee;
+  font-size: 20px;
+  transition: transform 0.3s;
+}
+.button:hover {
+  animation: gradient 2s linear alternate infinite;
+  transform: scale(1.05);
+}
+.zombie {
+  background-image: url("../assets/images/walkingdead.png");
+  background-size: 1000%, 100%;
+  background-position: left 100%;
+  background-repeat: no-repeat;
+  position: absolute;
+}
+
+@keyframes zombie-animate {
+  from {
+    background-position: left;
+  }
+  to {
+    background-position: right;
+  }
+}
+
+@keyframes zombie-move {
+  to {
+    right: 100%;
+  }
+}
+
+@keyframes zombie-move-left-right {
+  0% {
+    right: 0;
+  }
+  100% {
+    right: 470px;
+  }
+}
+@keyframes rotate-zombie {
+  0%,
+  100% {
+    transform: scaleX(1);
+  }
+  50% {
+    transform: scaleX(-1);
+  }
+}
+
+@keyframes gradient {
+  from {
+    background-position: 0%;
+  }
+  to {
+    background-position: 100%;
+  }
+}
+@keyframes render-zombie {
+  from {
+    background-position: left 100px;
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  to {
+    background-position: left 0px;
+  }
+}

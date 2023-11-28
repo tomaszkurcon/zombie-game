@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/main.css" />
+    <link rel="stylesheet" href="./css/fonts.css" />
+    <title>Zombie game</title>
+  </head>
+  <body>
+    <div id="cursor"></div>
+
+    <div id="header-overlay"></div>
+    <div id="overlay-backdrop">
+      <div class="modal-cart">
+        <div id="start-game-modal" class="modal-content">
+          <div class="modal-zombie"></div>
+          <button onclick="game.runGame()" class="button">Start game</button>
+        </div>
+        <div id="end-game-modal" class="modal-content">
+          <div class="modal-zombie"></div>
+          <span class="score">Your score: </span>
+          <span id="score-amount" class="score"></span>
+          <button onclick="game.restartGame()" class="button">
+            Play again
+          </button>
+        </div>
+      </div>
+    </div>
+    <header>
+      <ul id="lifes"></ul>
+      <p id="score"></p>
+    </header>
+
+    <script src="./js/main.js"></script>
+  </body>
+</html>
