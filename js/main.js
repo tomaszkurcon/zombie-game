@@ -25,18 +25,20 @@ overlayBackdrop.addEventListener("click", (event) => {
   event.stopPropagation();
 });
 class Game {
+  static initialZombiesMinSpeed = 15;
+  static initialGeneratingZombiesSpeed = 600;
   #initialLifes;
   #lifesAmount;
   #intervalGeneratingZombies;
-  #generatingZombiesSpeed;
+  #currentGeneratingZombiesSpeed;
   constructor(initLifes, initScore) {
     this.#initialLifes = initLifes;
     this.#lifesAmount = this.#initialLifes;
     this.#intervalGeneratingZombies = null;
-    this.#generatingZombiesSpeed = 600;
-
+    this.#currentGeneratingZombiesSpeed = Game.initialGeneratingZombiesSpeed;
     this.zombiesTimeouts = [];
     this.score = initScore;
+
   }
   #initLifes() {
     for (let i = 0; i < this.#lifesAmount; i++) {
@@ -66,17 +68,17 @@ class Game {
     overlayBackdrop.style.display = "none";
     startGameModal.style.display = "none";
     this.#intervalGeneratingZombies = Zombie.generateZombies(
-      this.#generatingZombiesSpeed,
+      Game.initialGeneratingZombiesSpeed,
       false
     );
   }
 
   #increaseGeneratingZombiesSpeed() {
-    if (this.#generatingZombiesSpeed < 200) return;
+    if (this.#currentGeneratingZombiesSpeed < 200) return;
     clearInterval(this.#intervalGeneratingZombies);
-    this.#generatingZombiesSpeed -= 20;
+    this.#currentGeneratingZombiesSpeed -= 20;
     this.#intervalGeneratingZombies = Zombie.generateZombies(
-      this.#generatingZombiesSpeed,
+      this.#currentGeneratingZombiesSpeed,
       true
     );
   }
@@ -112,6 +114,8 @@ class Game {
     lifesList.innerHTML = "";
     this.score = 30;
     this.#lifesAmount = this.#initialLifes;
+    this.#currentGeneratingZombiesSpeed = Game.initialGeneratingZombiesSpeed;
+    Zombie.minSpeed = Game.initialZombiesMinSpeed;
     const zombies = document.querySelectorAll(".zombie");
     zombies.forEach((zombie_element) => {
       zombie_element.remove();
@@ -128,7 +132,7 @@ class Zombie {
     this.src = "../assets/images/walkingdead.png";
     this.velocity = velocity;
   }
-  static minSpeed = 15;
+  static minSpeed = Game.initialZombiesMinSpeed;
 
   static generateZombies(time, shouldIncrease) {
     const generateZombieInterval = setInterval(() => {
